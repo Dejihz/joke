@@ -13,13 +13,14 @@ function createCategory(list){
     <select onchange="getJoke(this.value)">
         <option value="">Select a category</option>
         ${Object.values(list).map(function (category){
-            return `<option>${category}</option>`
+        return `<option>${category}</option>`
     }).join('')}
     </select>
     `
 }
 
 async function getJoke(value){
+    clearJoke()
     if (value != null){
         let response = await fetch(`https://v2.jokeapi.dev/joke/${value}`)
         let data = await response.json()
@@ -42,3 +43,12 @@ function displayJoke(joke){
     }
 }
 
+function clearJoke(){
+    let jokefield = document.getElementById('joke')
+    let setupfield = document.getElementById('setup')
+    let deliveryfield = document.getElementById('delivery')
+
+        jokefield.innerHTML = ``
+        setupfield.innerHTML = ``
+        deliveryfield.innerHTML = ``
+}
